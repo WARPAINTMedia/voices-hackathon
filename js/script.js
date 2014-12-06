@@ -7,6 +7,8 @@ var firstChoice = '0';
 var secondChoice = '0';
 var talents = {};
 var callbackList = [];
+var pushedIds = {};
+var $matchedEl = {};
 var $audio;
 
 function shuffle(sourceArray) {
@@ -23,6 +25,7 @@ function updateSidebar() {
   var i = callbackList.length - 1;
   var template = "<div class=\"clearfix saved-talent\"><div class=\"col col-2\"><img src=\""+callbackList[i].original_image+"\" alt=\"\"></div><div class=\"col col-9\"><div class=\"px2\"><h3 class=\"mt0\">"+callbackList[i].name+"</h3><a href=\""+callbackList[i].url+"\"><i class=\"fa fa-thumbs-o-up\"></i> Hire</a><a href=\""+callbackList[i].url+"\"><i class=\"ml1 fa fa-dollar\"></i> Request Quote</a></div></div></div>";
   $('#sidebar').append(template);
+  $('#nothing').remove();
 }
 
 function resetBoard() {
@@ -32,12 +35,14 @@ function resetBoard() {
 }
 
 function addToList() {
-  if (confirm('Add This Voice To You Callback List?')) {
-    var id = $('[data-id='+secondChoice+']')[0].id;
-    callbackList.push(talents[id[1]]);
-    updateSidebar();
-  } else {
-    // they dont want this person
+  var id = $(this).siblings('img').attr('data-id');
+  console.log(id);
+  for (var i = talents.length - 1; i >= 0; i--) {
+    if (talents[i].id == id && typeof(pushedIds[id]) == 'undefined') {
+      callbackList.push(talents[i]);
+      pushedIds[id] = true;
+      updateSidebar();
+    }
   }
 }
 
@@ -47,14 +52,22 @@ function stopAudio() {
 }
 
 function handleWin() {
-  alert('They Match!');
+  $matchedEl = $('[data-id='+secondChoice+']');
+  $matchedEl.parent().addClass('match');
+  $matchedEl.parent().parent().off('click');
+  $matchedEl.parent().find('.fa-bookmark').on('click', addToList);
+  // alert('They Match!');
   stopAudio();
-  addToList();
   resetBoard();
 }
 
 function handleLoss() {
-  alert('No Match!');
+  // alert('No Match!');
+  var $nomatch = $('[data-id='+secondChoice+']').last().parent();
+  $nomatch.addClass('no-match');
+  setTimeout(function(argument) {
+    $nomatch.removeClass('no-match');
+  }, 1200);
 }
 
 function checkChoice() {
@@ -76,11 +89,11 @@ function templateData(data, callback) {
     });
   }
   data = shuffle(data);
-  for (var i = data.length - 1; i >= 0; i--) {
-    $('#v'+i).attr({
-      'data-id': data[i].id,
-      'data-audio': data[i].audio,
-      'alt': data[i].name
+  for (var i2 = data.length - 1; i2 >= 0; i2--) {
+    $('#v'+i2).attr({
+      'data-id': data[i2].id,
+      'data-audio': data[i2].audio,
+      'alt': data[i2].name
     });
   }
   callback();
@@ -117,5 +130,8 @@ jQuery(function() {
     });
   }, function(err) {
     console.log(err);
+  });
+  $('img').on('error', function() {
+    this.src = "http://placehold.it/180x180";
   });
 });
