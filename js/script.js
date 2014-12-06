@@ -17,5 +17,15 @@ function checkChoice() {
 }
 
 jQuery(function() {
-  // body...
+  var $voices = $('.voices');
+  var $talents = $('.talents');
+  $voices.on('click', '.col', function() {
+    firstChoice = $(this).attr('data-id');
+    console.log($(this).attr('data-id'));
+    $talents.removeClass('disabled');
+  });
+  $talents.on('click', '.col', function() {
+    secondChoice = $(this).attr('data-id');
+    console.log($(this).attr('data-id'));
+  });
 });
