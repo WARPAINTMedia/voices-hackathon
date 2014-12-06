@@ -2,6 +2,11 @@
 @import "imports/__normalize";
 @import "imports/_basscss";
 
+$primary: #037afb;
+$success: #50a500;
+$light: #efefef;
+$dark: #818181;
+
 // [class^="icon"] {
 //   position: relative;
 //   top: 0.1em;
@@ -75,6 +80,10 @@ h6 {
   margin: 2.33em 0
 }
 
+a {
+  color: $primary;
+}
+
 hr {
   height: 1px;
   border: none;
@@ -144,4 +153,85 @@ form {
   width: 100%;
   max-width: 1140px;
   margin: 0 auto;
+}
+
+audio {
+  display: block;
+  width: 100%;
+  background: $light;
+}
+
+.talents, .voices {
+  position: relative;
+  a {
+    position: relative;
+    display: block; 
+    width: 180px;
+    height: 180px;
+    background: $light;
+    border: solid 4px white;
+    overflow: hidden;
+    i {
+      position: absolute;
+      display: none;
+      top: -2px;
+      right: 12px;
+      font-size: 24px;
+      color: white;
+      text-shadow: -1px 1px 2px rgba(0,0,0,.5);
+    }
+    &:hover {
+      border-color: lighten($primary, 15%);
+    }
+    &.no-match {
+      -webkit-animation: no-match 1s forwards;
+      animation: no-match 1s forwards;
+    }
+    &.match {
+      border-color: $success;
+      z-index: 5;
+      i {
+         display: block;
+         z-index: 6;
+      }
+    }
+  }
+}
+
+@include keyframes(no-match) {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-10px, 0, 0);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+.talents {
+  .cover {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(white, .5);
+    z-index: 4;
+  }
+  &.disabled {
+    .cover {
+      display: block;
+    }
+  }
+}
+
+#sidebar {
+  .saved-talent {
+    h3 {
+      margin-bottom: 5px;
+    }
+  }
 }

@@ -1285,6 +1285,9 @@ h6 {
   font-size: 0.75em;
   margin: 2.33em 0; }
 
+a {
+  color: #037afb; }
+
 hr {
   height: 1px;
   border: none;
@@ -1353,3 +1356,83 @@ form textarea {
   width: 100%;
   max-width: 1140px;
   margin: 0 auto; }
+
+audio {
+  display: block;
+  width: 100%;
+  background: #efefef; }
+
+.talents, .voices {
+  position: relative; }
+  .talents a, .voices a {
+    position: relative;
+    display: block;
+    width: 180px;
+    height: 180px;
+    background: #efefef;
+    border: solid 4px white;
+    overflow: hidden; }
+    .talents a i, .voices a i {
+      position: absolute;
+      display: none;
+      top: -2px;
+      right: 12px;
+      font-size: 24px;
+      color: white;
+      text-shadow: -1px 1px 2px rgba(0, 0, 0, 0.5); }
+    .talents a:hover, .voices a:hover {
+      border-color: #4ea2fd; }
+    .talents a.no-match, .voices a.no-match {
+      -webkit-animation: no-match 1s forwards;
+      animation: no-match 1s forwards; }
+    .talents a.match, .voices a.match {
+      border-color: #50a500;
+      z-index: 5; }
+      .talents a.match i, .voices a.match i {
+        display: block;
+        z-index: 6; }
+
+@-webkit-keyframes no-match {
+  0%, 100% {
+    transform: translate3d(0, 0, 0); }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-10px, 0, 0); }
+
+  20%, 40%, 60%, 80% {
+    transform: translate3d(10px, 0, 0); } }
+
+@-moz-keyframes no-match {
+  0%, 100% {
+    transform: translate3d(0, 0, 0); }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-10px, 0, 0); }
+
+  20%, 40%, 60%, 80% {
+    transform: translate3d(10px, 0, 0); } }
+
+@keyframes no-match {
+  0%, 100% {
+    transform: translate3d(0, 0, 0); }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-10px, 0, 0); }
+
+  20%, 40%, 60%, 80% {
+    transform: translate3d(10px, 0, 0); } }
+
+.talents .cover {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 4; }
+.talents.disabled .cover {
+  display: block; }
+
+#sidebar .saved-talent h3 {
+  margin-bottom: 5px; }

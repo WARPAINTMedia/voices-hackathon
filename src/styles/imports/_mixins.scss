@@ -48,6 +48,19 @@
   }
 }
 
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes $animation-name {
+    @content;
+  }
+  @-moz-keyframes $animation-name {
+    @content;
+  }
+  @keyframes $animation-name {
+    @content;
+  }
+}
+
 @mixin box-sizing($box-model) {
   -webkit-box-sizing: $box-model;
   -moz-box-sizing: $box-model;
