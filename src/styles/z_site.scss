@@ -1,0 +1,147 @@
+@import "imports/_mixins";
+@import "imports/__normalize";
+@import "imports/_basscss";
+
+// [class^="icon"] {
+//   position: relative;
+//   top: 0.1em;
+// }
+
+$body-font: "Helvetica Neue",Helvetica,Arial,sans-serf;
+$heading-font: $body-font;
+
+html {
+  min-height: 100%;
+}
+
+body {
+  font: normal normal 400 14px/1.5 $body-font;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%
+}
+
+.clearfix {
+  @include clearfix();
+}
+
+*, *:after, *:before {
+  @include box-sizing(border-box);
+}
+
+::-moz-focus-inner {
+  border: 0;
+}
+
+h1,h2,h3,h4,h5,h6,strong,b {
+  font-family: $heading-font;
+  font-weight: 700
+}
+
+em,i {
+  font-style: italic;
+}
+
+h1 {
+  font-size: 2em;
+  margin: .67em 0
+}
+
+h2 {
+  font-size: 1.5em;
+  margin: .83em 0
+}
+
+h3 {
+  font-size: 1.17em;
+  margin: 1em 0
+}
+
+h4 {
+  font-size: 1em;
+  margin: 1.33em 0
+}
+
+h5 {
+  font-size: .83em;
+  margin: 1.67em 0
+}
+
+h6 {
+  font-size: .75em;
+  margin: 2.33em 0
+}
+
+hr {
+  height: 1px;
+  border: none;
+  @include inline-block();
+  margin: 1em 0;
+  background-color: rgba(0,0,0,0.2);
+  width: 100%;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  th {
+    text-align: left;
+    &[align="left"] {
+      text-align: left;
+    }
+    &[align="center"], &[align="middle"] {
+      text-align: center;
+    }
+    &[align="right"] {
+      text-align: right;
+    }
+  }
+}
+
+// some default placeholder style
+@include placeholder {
+  color: rgba(0,0,0,0.5);
+}
+
+label, input, select, textarea, button, button[type="button"], input[type="button"], input[type="reset"], input[type="submit"] {
+  // these font styles are not inherited from the body!!
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+form {
+  label, input, button, select, textarea {
+    @include inline-block();
+    width: 100%;
+    outline: none;
+    border: none;
+    margin-bottom: 1em;
+    padding: 0.4em;
+    border: 1px solid rgba(0,0,0,0.2);
+    transition: border 0.2s ease;
+    &:focus {
+      border: 1px solid rgba(0,0,0,0.5);
+    }
+  }
+  input[type="submit"], button, button[type="button"], input[type="button"], input[type="reset"], input[type="submit"] {
+    width: auto;
+    padding: 0.4em 1em;
+    &:hover {
+      background: black;
+    }
+  }
+  textarea {
+    // resize: none;
+    max-width: 100%; // no annoying >100% stretching
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+}
