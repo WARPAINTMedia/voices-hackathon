@@ -58,7 +58,7 @@ function handleWin() {
 
 function handleLoss() {
   // alert('No Match!');
-  var $nomatch = $('[data-id='+secondChoice+']').last().parent();
+  var $nomatch = $('[data-id='+secondChoice+']').last().parent().not('.match');
   $nomatch.addClass('no-match');
   setTimeout(function(argument) {
     $nomatch.removeClass('no-match');
